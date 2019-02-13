@@ -28,9 +28,25 @@ num_data <- scale(num_data)
 
 fitK <- kmeans(num_data, 3)
 
-
 # visualize the clusters based on the different features
 plot(data_iris, col = fitK$cluster)
 
 # Focus on 2 features to see cluster overlap
 plot(data_iris[c('sepal_length', 'sepal_width')], col = fitK$cluster)
+
+
+wss <- (nrow(num_data)-1)*sum(apply(num_data, 2, var))
+for (i in 2:10)
+  wss[i] <- sum(kmeans(num_data,i)$withinss)
+
+plot(1:10, wss, type = 'b',main = "Sum of Squared Error (Elbow plot)", 
+     xlab = "# of clusters", ylab = 'Within Group Sum of Squares')
+
+
+# fitK <- kmeans(num_data, 4)
+# 
+# # visualize the clusters based on the different features
+# plot(data_iris, col = fitK$cluster)
+# 
+# # Focus on 2 features to see cluster overlap
+# plot(data_iris[c('sepal_length', 'petal_length')], col = fitK$cluster)
