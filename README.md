@@ -26,15 +26,17 @@ plot(1:10, wss, type = 'b',main = "Sum of Squared Error (Elbow plot)",
      xlab = "# of clusters", ylab = 'Within Group Sum of Squares')
 ```
 
+
 2) This [second_file]() 
 focuses on the use of hypothesis testing to analyze Click Through Rate (CTR) for a subset of data from the New York Times website. 
 Here we define, _CTR_ as the number of clicks a user makes per impression that is made upon the user. 
 
 We are going to determine if there is statistically significant difference between the mean CTR for the following groups:
   1) Signed in users v.s. Not signed in users
+  
   2) Male v.s. Female
 
-A default _significance level_ for {\alpha} = 0.05 will be used.
+A default _significance level_ for $\alpha$ = 0.05 will be used.
 
 We start our analysis of the data by looking over the distributions for each of the variables:
 ```{R}
@@ -55,14 +57,15 @@ hist(df_not_SignedIn$Gender,      col = 'red')
 ```
 
 Applying a _Welch Two Sample t-test_ where:
-H_0: The means of users signed in is equal to that of users _not_ signed in.
-H_a: The difference in the means is not equal to 0
+$H_0$: The means of users signed in is equal to that of users _not_ signed in.
+
+$H_a$: The difference in the means is not equal to 0
 
 ```{R}
 t.test(df_SignedIn$CTR, df_not_SignedIn$CTR)
 ```
 we find that the 
-**p-value < 2.2e-16 < \alphat**
+**p-value < 2.2e-16 < $\alpha$**
 
 with such a small p-value we would REJECT the null hypothesis.
 
@@ -72,8 +75,10 @@ df_F = df_SignedIn[df_SignedIn[ ,"Gender"] == 0, ]
 df_M = df_SignedIn[df_SignedIn[ ,"Gender"] == 1, ]
 ```
 Then our hypothesis become
-H_0: The mean CTR for Male users that signed in is equal to that of the Female usersthat are signed in.
-H_a: The difference in the means is not equal to 0
+
+$H_0$: The mean CTR for Male users that signed in is equal to that of the Female usersthat are signed in.
+
+$H_a$: The difference in the means is not equal to 0
 ```{R}
 t.test(df_F$CTR, df_M$CTR)
 ```
